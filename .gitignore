@@ -3,3 +3,5 @@
 **/.gradle
 **/.exercism
 **/.idea
+**/build
+**/*.iml
