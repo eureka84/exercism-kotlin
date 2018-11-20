@@ -1,3 +1,5 @@
-**/target
+**/out
+**/gradle
+**/.gradle
 **/.exercism
 **/.idea
