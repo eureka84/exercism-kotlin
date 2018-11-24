@@ -22,10 +22,23 @@ object PigLatin {
             { s -> "${s.substring(1)}${s[0]}ay" }
     )
 
+    private val internalYActingLikeAVowel = Rule(
+            { s -> s.matches((Regex(".*([^aeiou]|rh)y.*"))) },
+            { s ->
+                val regex = Regex("([^aeiou]|rh)y(.*)")
+                val matchResult = regex.matchEntire(s)
+                matchResult?.let { m ->
+                    val g: List<String> = m.groupValues
+                    "y${g[2]}${g[1]}ay"
+                } ?: ""
+            }
+    )
+
     private val rules = listOf(
             startsWithAVowel,
             startsWithAThreeLettersConsonantGroup,
             startsWithATwoLettersConsonantGroup,
+            internalYActingLikeAVowel,
             startsWithAConsonant
     )
 
