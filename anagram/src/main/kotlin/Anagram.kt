@@ -1,19 +1,14 @@
-class Anagram(value: String){
+class Anagram(private val value: String){
 
-    private val lowerCaseValue = value.toLowerCase()
-    private val letters: Map<Char, Int> = lettersCount(value)
+    private val letters= sortedLetters(value)
 
-    private fun lettersCount(input: String): Map<Char, Int> {
-        return input.groupBy { it.toLowerCase() }
-                .map { (l, list) -> (l to list.size) }
-                .toMap()
-    }
+    private fun sortedLetters(input: String) = input.toLowerCase().toCharArray().sorted()
 
-    private fun sameWord(s: String) = s.toLowerCase() == lowerCaseValue
-
-    private fun hasSameLetters(s: String) = lettersCount(s) == letters
+    private fun sameWord(s: String) = s.toLowerCase() == value.toLowerCase()
 
     fun match(inputs: List<String>): Set<String> =
-        inputs.filter { s -> !sameWord(s) && hasSameLetters(s) }.toSet()
+        inputs.filter { s -> !sameWord(s) }
+              .filter { s -> sortedLetters(s) == letters }
+              .toSet()
 
 }
