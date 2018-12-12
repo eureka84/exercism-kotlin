@@ -1,51 +1,32 @@
 object PigLatin {
 
+    private const val VOWEL_PATTERN = "([aeiou]|yt|xr).*"
+    private const val CONSONANTS_PATTERN = "(squ|thr|sch|ch|qu|th|rh|[^aeiou])(.*)"
+
     private data class Rule(val appliesTo: (String) -> Boolean, val transform: (String) -> String)
 
     private val startsWithAVowel = Rule(
-            { s -> s.matches(Regex("([aeiou]|yt|xr).*")) },
+            { s -> s.matches(Regex(VOWEL_PATTERN)) },
             { s -> "${s}ay" }
     )
 
-    private val startsWithAThreeLettersConsonantGroup = Rule(
-            { s -> s.matches(Regex("(squ|thr|sch).*")) },
-            { s -> "${s.substring(3)}${s.substring(0, 3)}ay" }
-    )
-
-    private val startsWithATwoLettersConsonantGroup = Rule(
-            { s -> s.matches(Regex("(ch|qu|th).*")) },
-            { s -> "${s.substring(2)}${s.substring(0, 2)}ay" }
-    )
-
     private val startsWithAConsonant = Rule(
-            { s -> s.matches(Regex("[^aeiou].*")) },
-            { s -> "${s.substring(1)}${s[0]}ay" }
-    )
-
-    private val internalYActingLikeAVowel = Rule(
-            { s -> s.matches((Regex(".*([^aeiou]|rh)y.*"))) },
-            { s ->
-                val regex = Regex("([^aeiou]|rh)y(.*)")
-                val matchResult = regex.matchEntire(s)
-                matchResult?.let { m ->
-                    val g: List<String> = m.groupValues
-                    "y${g[2]}${g[1]}ay"
-                } ?: ""
-            }
+            { s -> s.matches(Regex(CONSONANTS_PATTERN)) },
+            { s -> Regex(CONSONANTS_PATTERN).replace(s) { m ->
+                val (prefix, postfix) = m.destructured
+                "$postfix${prefix}ay"
+            }}
     )
 
     private val rules = listOf(
             startsWithAVowel,
-            startsWithAThreeLettersConsonantGroup,
-            startsWithATwoLettersConsonantGroup,
-            internalYActingLikeAVowel,
             startsWithAConsonant
     )
 
     fun translate(input: String): String {
         val translate = { word: String ->
             rules.find { rule -> rule.appliesTo(word) }
-                ?.let { rule -> rule.transform.invoke(word) }
+                ?.let { rule -> rule.transform(word) }
                 ?: word
         }
 
