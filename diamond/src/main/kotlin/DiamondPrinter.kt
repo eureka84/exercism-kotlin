@@ -3,11 +3,9 @@ const val A = 'A'
 class DiamondPrinter {
 
     fun printToList(c: Char): List<String> {
-        val maxDist = c - A
         val halfDiamond = (A..c).map { char ->
             val fromA = char - A
-            val toC = maxDist - fromA
-            val externalSpaces = toC.spaces()
+            val externalSpaces = (c - char).spaces()
             when (fromA) {
                 0 -> externalSpaces + char + externalSpaces
                 else -> {
