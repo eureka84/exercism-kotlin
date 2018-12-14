@@ -4,7 +4,7 @@ class DiamondPrinter {
 
     fun printToList(c: Char): List<String> {
         val maxDist = c - A
-        val halDiamond = (A..c).map { char ->
+        val halfDiamond = (A..c).map { char ->
             val fromA = char - A
             val toC = maxDist - fromA
             val externalSpaces = toC.spaces()
@@ -16,7 +16,7 @@ class DiamondPrinter {
                 }
             }
         }
-        return halDiamond.plus(halDiamond.initial().reversed())
+        return halfDiamond.plus(halfDiamond.initial().reversed())
     }
 
 }
