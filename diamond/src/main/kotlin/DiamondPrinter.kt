@@ -2,11 +2,11 @@ class DiamondPrinter {
 
     fun printToList(c: Char): List<String> {
         val halfDiamond = ('A'..c).map { char ->
-            val externalSpaces = (c - char).spaces()
+            val externalSpaces = (char distanceFrom c).spaces()
             when (char) {
                 'A' -> externalSpaces + char + externalSpaces
                 else -> {
-                    val internalSpaces = (2 * (char - 'A') - 1).spaces()
+                    val internalSpaces = (2 * (char distanceFrom 'A') - 1).spaces()
                     externalSpaces + char + internalSpaces + char + externalSpaces
                 }
             }
@@ -16,4 +16,5 @@ class DiamondPrinter {
 
 }
 
+private infix fun Char.distanceFrom(other: Char) = Math.abs(this - other)
 private fun Int.spaces(): String = " ".repeat(this)
