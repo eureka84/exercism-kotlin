@@ -1,15 +1,12 @@
-const val A = 'A'
-
 class DiamondPrinter {
 
     fun printToList(c: Char): List<String> {
-        val halfDiamond = (A..c).map { char ->
-            val fromA = char - A
+        val halfDiamond = ('A'..c).map { char ->
             val externalSpaces = (c - char).spaces()
-            when (fromA) {
-                0 -> externalSpaces + char + externalSpaces
+            when (char) {
+                'A' -> externalSpaces + char + externalSpaces
                 else -> {
-                    val internalSpaces = (2 * fromA - 1).spaces()
+                    val internalSpaces = (2 * (char - 'A') - 1).spaces()
                     externalSpaces + char + internalSpaces + char + externalSpaces
                 }
             }
