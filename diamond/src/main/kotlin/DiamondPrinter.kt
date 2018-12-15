@@ -14,15 +14,9 @@ class DiamondPrinter {
                 }
             }
         }
-        return halfDiamond.plus(halfDiamond.initial().reversed())
+        return halfDiamond.plus(halfDiamond.reversed().drop(1))
     }
 
 }
-
-private fun <T> List<T>.initial(): List<T> =
-        when  {
-            this.isEmpty() -> throw IllegalAccessException("initial of an empty list")
-            else -> this.subList(0, this.size - 1)
-        }
 
 private fun Int.spaces(): String = " ".repeat(this)
