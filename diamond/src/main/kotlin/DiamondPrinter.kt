@@ -16,5 +16,5 @@ class DiamondPrinter {
 
 }
 
-private infix fun Char.distanceFrom(other: Char) = Math.abs(this - other)
+private infix fun Char.distanceFrom(other: Char): Int = Math.abs(this - other)
 private fun Int.spaces(): String = " ".repeat(this)
