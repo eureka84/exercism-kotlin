@@ -8,17 +8,13 @@ object Bob {
             }
 }
 
-private fun String.isSilence(): Boolean {
-    val spaces = Regex("[\\s\\t\\n]")
-    return this.replace(spaces, "").isEmpty()
-}
+private fun String.isSilence(): Boolean = this.trim().isEmpty()
 
 private fun String.isAQuestion(): Boolean = this.trim().endsWith("?")
 
 private fun String.isShouted(): Boolean {
-    val nonLetters = Regex("[^A-Za-z]")
-    val onlyLetters = this.replace(nonLetters, "")
+    val onlyLetters = this.filter { c -> c.isLetter() }
     return !onlyLetters.isEmpty() && onlyLetters.isUpperCase()
 }
 
-private fun String.isUpperCase(): Boolean = this.all { c -> c in ('A'..'Z') }
+private fun String.isUpperCase(): Boolean = this.all { c -> c.isUpperCase() }
