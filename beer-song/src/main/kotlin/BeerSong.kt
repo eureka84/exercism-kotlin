@@ -2,16 +2,15 @@ object BeerSong {
     fun verses(from: Int, to: Int): String =
             (from downTo to).joinToString(separator = "\n") { bottlesOnTheWall -> verse(bottlesOnTheWall) }
 
-    private fun verse(bottlesOnTheWall: Int) =
-            firstVerse(bottlesOnTheWall) + secondVerse(bottlesOnTheWall, bottlesOnTheWall - 1)
+    private fun verse(n: Int) = firstVerse(n) + secondVerse(n)
 
     private fun firstVerse(n: Int) = "${n.onTheWall().capitalize()}, ${n.bottles()}.\n"
 
-    private fun secondVerse(current: Int, remaining: Int): String =
-            when (current) {
+    private fun secondVerse(n: Int): String =
+            when (n) {
                 0 -> "Go to the store and buy some more, ${99.onTheWall()}.\n"
-                1 -> "Take it down and pass it around, ${remaining.onTheWall()}.\n"
-                else -> "Take one down and pass it around, ${remaining.onTheWall()}.\n"
+                1 -> "Take it down and pass it around, ${(n - 1).onTheWall()}.\n"
+                else -> "Take one down and pass it around, ${(n -1).onTheWall()}.\n"
             }
 
 
