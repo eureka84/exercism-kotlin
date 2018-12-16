@@ -17,8 +17,8 @@ private fun String.isAQuestion(): Boolean = this.trim().endsWith("?")
 
 private fun String.isShouted(): Boolean {
     val nonLetters = Regex("[^A-Za-z]")
-    val letters = this.replace(nonLetters, "")
-    return !letters.isEmpty() && letters.isUpperCase()
+    val onlyLetters = this.replace(nonLetters, "")
+    return !onlyLetters.isEmpty() && onlyLetters.isUpperCase()
 }
 
 private fun String.isUpperCase(): Boolean = this.all { c -> c in ('A'..'Z') }
