@@ -1,8 +1,9 @@
 object BeerSong {
 
-    fun verses(from: Int, to: Int) = (from downTo to).joinToString(separator = "\n") { bottlesOnTheWall ->
-        verse(bottlesOnTheWall)
-    }
+    fun verses(initialBottles: Int, finalBottles: Int) =
+        (initialBottles downTo finalBottles).joinToString(separator = "\n") { bottlesOnTheWall ->
+            verse(bottlesOnTheWall)
+        }
 
     private fun verse(n: Int) = firstLine(n) + secondLine(n)
 
