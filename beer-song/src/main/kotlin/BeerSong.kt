@@ -10,7 +10,7 @@ object BeerSong {
 
     private fun secondLine(n: Int) = when (n) {
         0 -> "Go to the store and buy some more, ${99.onTheWall()}.\n"
-        1 -> "Take it down and pass it around, ${(n - 1).onTheWall()}.\n"
+        1 -> "Take it down and pass it around, ${0.onTheWall()}.\n"
         else -> "Take one down and pass it around, ${(n - 1).onTheWall()}.\n"
     }
 
