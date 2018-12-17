@@ -2,10 +2,8 @@ object BeerSong {
 
     fun verses(initialBottles: Int, finalBottles: Int) =
         (initialBottles downTo finalBottles).joinToString(separator = "\n") { bottlesOnTheWall ->
-            verse(bottlesOnTheWall)
+            firstLine(bottlesOnTheWall) + secondLine(bottlesOnTheWall)
         }
-
-    private fun verse(n: Int) = firstLine(n) + secondLine(n)
 
     private fun firstLine(n: Int) = "${n.onTheWall().capitalize()}, ${n.bottles()}.\n"
 
